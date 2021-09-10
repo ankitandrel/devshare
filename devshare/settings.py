@@ -163,12 +163,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# SMTP configuration developent
 
-EMAIL_HOST = 'smtp.mailgun.org'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'postmaster@sandbox31849aa355b34604aeb6854185195dfc.mailgun.org'
-EMAIL_HOST_PASSWORD = 'c8b10fea3817c79c14aa8ef8b1a16828-9ad3eb61-88984efe'
+
 
 
 # smtp configurations production
