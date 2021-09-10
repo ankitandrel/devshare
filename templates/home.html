@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="display-5  text-center">Featured</div>
+    
+    <!-- Main Content -->
+    <!-- featured Section -->
+
+    <section class="featured-section mb-5 mx-auto clearfix">
+      <div class="container">
+        <div class="row">
+          <!-- Card -->
+          {% for featured in featured_reasource %}
+          <div class="col-md-4 mt-4">
+            <div class="card">
+              <a href="{{featured.resource_link}}" class="text-decoration-none" style="color: #000;" target = "_blank">
+                <div class="card-body">
+                  <h5 class="card-title">{{featured.resource_name }} <span><ion-icon name="open-outline"></ion-icon></span></h5>
+                  <p class="card-text">{{featured.resource_info |slice:":70" | safe }}...</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+          <!-- Card End -->
+          
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    
+   
+    <section class=" clearfix resources-section mb-5 mx-auto">
+       <div class="display-5 mt-4 text-center ">Resources</div>
+      <div class="container">
+        <div class="row">
+          <!-- Card -->
+          {% for category in all_category %}
+          <div class="col-md-4 mt-4">
+            <div class="card">
+              <a href="{% url 'resource_by_category' category.category_name_slug %}" class="text-decoration-none" style="color: #000;">
+                <div class="card-body">
+                  <h5 class="card-title">{{category.category_name }} <span><ion-icon name="open-outline"></ion-icon></span></h5>
+                  <p class="card-text">{{category.category_info}}</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+          <!-- Card End -->
+         
+          
+        </div>
+        <a href="{% url 'view_all_category' %}" class="primary-btn float-end mt-4 view-all">View All</a>
+      </div>
+    </section>
+
+    <!-- Courses -->
+
+    <div class="clearfix display-5 mt-4 text-center ">Articles</div>
+    <section class="resources-section mb-5 mx-auto">
+      
+      <div class="container">
+        <div class="row">
+          <!-- Card -->
+          {% for article in featured_article %}
+          <div class="col-md-4 mt-4">
+            <div class="card">
+              <a href="{{article.article_link}}" class="text-decoration-none" style="color: #000;" target = "_blank">
+                <div class="card-body">
+                  <h5 class="card-title">{{article.article_title}}
+                  {% comment %} <span><ion-icon name="open-outline"></ion-icon></span> {% endcomment %}
+                  </h5>
+                  <p class="card-text">{{article.article_info}}</p>
+                </div>
+              </a>
+              <div class="card-footer">
+                            {% for tag in article.article_tag.all %}
+                            <a href="{% url 'article_by_tag' tag.slug %}" class = "text-decoration-none"}>
+                                <span class="badge bg-warning text-dark">{{tag}}</span>
+                            </a>
+                            {% endfor %}
+                            <span class="badge bg-info text-dark">{{article.numbmer_of_likes}} Recommendations</span>
+
+                        </div>
+            </div>
+            
+          </div>
+          {% endfor %}
+          <!-- Card End -->
+         
+         
+          
+        </div>
+        <a href="{% url 'article' %}" class="primary-btn float-end mt-4 view-all">View All</a>
+      </div>
+    </section>
+{% endblock content %}

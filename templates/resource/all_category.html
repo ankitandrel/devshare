@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if category %}
+    <section class="featured-section mb-5 mx-auto clearfix">
+    <div class="display-5  text-center">All Resources</div>
+
+      <div class="container">
+        <div class="row">
+          <!-- Card -->
+          {% for cat in category %}
+          <div class="col-md-4 mt-4">
+            <div class="card">
+              <a href="" class="text-decoration-none" style="color: #000;">
+                <div class="card-body">
+                  <h5 class="card-title">{{cat.category_name }} <span><ion-icon name="open-outline"></ion-icon></span></h5>
+                  <p class="card-text">{{cat.category_info |slice:":70" | safe }}...</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+          <!-- Card End -->
+          
+          
+        </div>
+      </div>
+    </section>
+{% endif %}
+
+{% endblock content %}

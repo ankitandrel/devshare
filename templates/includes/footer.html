@@ -1,0 +1,73 @@
+<footer class="footer">
+  <div class="container">
+    <div class="row text-white">
+      <div class="col-md-6">
+        <div class="footer-link d-flex justify-content-around">
+          <div class="link-set-1">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'article' %}">Article</a>
+              </li>
+            </ul>
+          </div>
+          <div class="link-set-2">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'all_resource' %}">Resources</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'submit_resource' %}">Submit Resource</a>
+              </li>
+              {% comment %} <li class="nav-item">
+                <a class="nav-link" href = "resource/icons">Icons</a>
+              </li> {% endcomment %}
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% comment %} <div class="col-md-6">
+        <div class="footer-link d-flex justify-content-around">
+          <div class="link-set-1">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'category_links' %}">Illustrations</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+          </div>
+          <div class="link-set-2">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Active</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div> {% endcomment %}
+    </div>
+  </div>
+</footer>

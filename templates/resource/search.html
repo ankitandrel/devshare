@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+ <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 resources-container ">
+            
+            <h3 class="fs-3 ">About {{total_search_reasult}} results</h3>
+            <hr>
+           
+                <!-- Post content-->
+                {% if resources %}
+                <article>
+                    {% comment %} <h5 class="fs-5 badge bg-secondary">Resources ({{resources_count}})</h5> {% endcomment %}
+                    <span type="button" class="btn btn-warning mb-3">
+                        Resources <span class="badge bg-secondary">{{resources_count}}</span>
+                    </span>
+                    <!-- Card -->
+                    {% for resource in resources %}
+                    
+                        <div class="card mb-3">
+                            <div class="card-body d-flex justify-content-between">
+                                <!-- <div class="r-section mr-4 d-flex flex-column justify-content-start align-items-center " style="width: 40px; ">
+                                    <button type="submit" style="background-color: transparent; all:  unset; cursor: pointer;">
+                                        <ion-icon name="thumbs-up-outline" ></ion-icon>
+                                    </button>
+                                    <p class="mt-2">+10</p>
+                                </div> -->
+                                <a href="{{resource.resource_link}}" target="_blank" class="text-decoration-none" style="color: #000;">
+                                    <div class="card-content ">
+                                        <h5 class="card-title" style="width: 95%;">{{resource.resource_name}} <span><ion-icon name="open-outline"></ion-icon></span></h5>
+                                        <p class="card-text" style="width: 95%;">{{resource.resource_info}}  </p>
+                                    </div>
+                                </a>
+                                <div class="r-section mr-4 d-flex flex-column justify-content-start align-items-center " style="width: 40px;    ">
+                                    <form action="{% url 'resource_like' resource.id %}" method = "POST">
+                                    {% csrf_token %}
+                                        
+                                        <button type="submit" value = {{resource.id}} name = "like" style="background-color: transparent; all:  unset; cursor: pointer;">
+                                            {% if  request.user not in resource.liked.all  %}
+                                            <ion-icon name="thumbs-up-outline"></ion-icon>
+                                            {% else %}
+                                            <ion-icon name="thumbs-up"></ion-icon>
+                                            {% endif %}
+                                        </button>
+                                        
+                                    </form>
+                                    <p class="mt-2">{{resource.numbmer_of_likes}}</p>
+                                </div>
+                                
+                            </div>
+                            <div class="card-footer">
+                                <span class="badge bg-info text-dark">
+                                    Last Updated: {{resource.updated_on | date}}
+                                </span>
+                                {% if resource.is_paid %}
+                                <span class="badge bg-warning text-dark">Paid</span>
+                                {% else %}
+                                <span class="badge bg-info text-dark"> Free</span>
+                                {% endif %}
+                                
+                                
+                                <span class="badge bg-info text-dark">{{resource.numbmer_of_likes}} Recommendations</span>
+
+                            </div>
+                        </div>
+                        
+                    
+                    {% endfor %}
+                   <!-- Card End -->
+                   
+                </article>
+                {% endif %}
+                {% if articles %}
+                <article>
+                    {% comment %} <h5 class="fs-5 badge bg-secondary">Articles ({{articles_count}})</h5> {% endcomment %}
+                    <span type="button" class="btn btn-warning mb-3">
+                        Articles <span class="badge bg-secondary">{{articles_count}}</span>
+                    </span>
+                    {% for article in articles %} 
+                    <div class="card mb-3">
+                        <div class="card-body d-flex justify-content-between">
+                            <a href="{{article.article_link}}" target = "_blank" class="text-decoration-none" style="color: #000;">
+                                <div class="card-content ">
+                                    <h5 class="card-title" >{{article.article_title}}<span></span></h5>
+                                    <p class="card-text" >{{article.article_info}}</p>
+                                    
+                                </div>
+                            </a>
+                            <div class="r-section mr-4 d-flex flex-column justify-content-start align-items-center " style="width: 40px;    ">
+                                <form action="{% url 'article_like' article.id %}" method = "POST">
+                                    {% csrf_token %}
+                                        
+                                        <button type="submit" value = {{article.id}} name = "like" style="background-color: transparent; all:  unset; cursor: pointer;">
+                                            {% if  request.user not in article.liked.all  %}
+                                            <ion-icon name="thumbs-up-outline"></ion-icon>
+                                            {% else %}
+                                            <ion-icon name="thumbs-up"></ion-icon>
+                                            {% endif %}
+                                        </button>
+                                        
+                                    </form>
+                                <p class="mt-2">{{article.numbmer_of_likes}}</p>
+                            </div>
+                            
+                        </div>
+                        <div class="card-footer">
+                            <span class="badge bg-info text-dark">
+                                Published on: {{article.article_posted_on |date}}
+                            </span>
+                            
+                            <span class="badge bg-warning text-dark">Posted by: <a href="" class = "text-decoration-none">{{article.article_posted_by}}</a></span>
+                            {% for tag in article.article_tag.all %}
+                            
+                            <a href="{% url 'article_by_tag' tag.slug %}" class = "text-decoration-none"}>
+                                <span class="badge bg-warning text-dark">{{tag}}</span>
+                            </a>
+                            {% endfor %}
+                            <span class="badge bg-info text-dark">{{article.numbmer_of_likes}} Recommendations</span>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                 </article>
+                {% endif %}
+            </div>
+            <!-- Side widgets-->
+            <div class="col-md-4" id="post-btn">
+                <!-- Categories widget-->
+                <div class="card mb-4 hide-on-mobile">
+                    <div class="card-header">Other Resources</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6 resources-sidebar">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">Illustrations</a></li>
+                                    <li><a href="#!">HTML</a></li>
+                                    <li><a href="#!">Freebies</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6 resources-sidebar ">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">JavaScript</a></li>
+                                    <li><a href="#!">CSS</a></li>
+                                    <li><a href="#!">Tutorials</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side widget-->
+                <div class="card mb-4 hide-on-mobile">
+                    <div class="card-header">Side Widget</div>
+                    <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+

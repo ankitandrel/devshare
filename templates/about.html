@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ 
+<div class="container">
+    <div class="row mx-auto">
+        <div class="col-md-8 mx-auto">
+            <div class="heading">
+                <h4 class="display-4 text-center">About Us</h4>
+            </div>
+            <div class="content">
+                <p class="fs-4">
+                <a href="{% url 'home' %}" class="text-decoration-none ">devshare</a> is a website where you can find the best development resources, articles, courses, coupons, shared by the other developers.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 resources-container ">
+                <!-- Post content-->
+                <article>
+                    <h5>{{request.user.first_name}} Posts</h5>
+                    <hr>
+                    <!-- Card -->
+                    {% if articles_posted_by_user %}
+                        {% for article in articles_posted_by_user %}
+                        <div class="card mb-3">
+                            <div class="card-body d-flex justify-content-between">
+                                <a href="" class="text-decoration-none" style="color: #000;">
+                                    <div class="card-content ">
+                                        <h5 class="card-title" >{{article.article_title}}</h5>
+                                        <p class="card-text" >{{article.article_info | slice:"30"}}...</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-footer">
+                                <span class="badge bg-info text-dark">
+                                    Last Updated: {{articles.article_posted_on | date}}
+                                </span>
+                                <span class="badge bg-info text-dark">{{article.numbmer_of_likes}} Recomendations</span>
+                                <a href="{% url 'delete_article' article.id %}" class="badge btn float-end bg-danger text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Delete  
+                                </a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure to delete this post <h6 class="badge bg-warning text-dark">"{{article.article_title}}"</h6>
+                                        </div>
+                                        <form action="{% url 'delete_article' article.id %}" method="POST">
+                                            {% csrf_token%}
+                                            <div class="modal-footer">
+                                                <input class="btn btn-danger" type="submit" name="Confirm" value="Confirm">
+                                            <a class="btn btn-warning" href="{% url 'profile' %}">Cancel</a> 
+                                            </div>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if resource_posted_by_user %}
+                        {% for resource in resource_posted_by_user %}
+                        <div class="card mb-3">
+                            <div class="card-body d-flex justify-content-between">
+                                <a href="" class="text-decoration-none" style="color: #000;">
+                                    <div class="card-content ">
+                                        <h5 class="card-title" >{{resource.resource_name}}</h5>
+                                        <p class="card-text" >{{resource.resource_info | slice:"30"}}...</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-footer">
+                                <span class="badge bg-info text-dark">
+                                    Last Updated: {{resource.updated_on | date}}
+                                </span>
+                                <span class="badge bg-info text-dark">{{resource.numbmer_of_likes}} Recomendations</span>
+                                
+                                <a href="{% url 'delete_resource' resource.id %}" class="badge btn float-end bg-danger text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Delete  
+                                </a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure to delete this post <h6 class="badge bg-warning text-dark">"{{resource.resource_name}}"</h6>
+                                        </div>
+                                        <form action="{% url 'delete_resource' resource.id %}" method="POST">
+                                            {% csrf_token%}
+                                            <div class="modal-footer">
+                                                <input class="btn btn-danger" type="submit" name="Confirm" value="Confirm">
+                                            <a class="btn btn-warning" href="{% url 'profile' %}">Cancel</a> 
+                                            </div>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    
+                    
+                    <!-- Card End -->
+                </article>
+                
+            </div>
+            <!-- Side widgets-->
+            <div class="col-md-4" id="post-btn">
+                <!-- Categories widget-->
+                <div class="card mb-4 ">
+                    <div class="card-header">Update Details</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <form action="{% url 'profile' %}" method = "POST">
+                                {% csrf_token %}
+                                {{profile_form | crispy}}
+                                <div class="d-grid gap-2 mt-3">
+                                    <button class="primary-btn text-center" type="submit">Update</button>
+                                </div> 
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Post Article Model -->
+    <!-- Button trigger modal -->
+    
+    
+    
+{% endblock content %}

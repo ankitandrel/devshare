@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+            <div class="row">
+                <div class="col-md-8 resources-container">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Card -->
+                        {% for res in resources %}
+                        <div class="card mb-3">
+                            <div class="card-body d-flex justify-content-between">
+                                <!-- <div class="r-section mr-4 d-flex flex-column justify-content-start align-items-center " style="width: 40px; ">
+                                    <button type="submit" style="background-color: transparent; all:  unset; cursor: pointer;">
+                                        <ion-icon name="thumbs-up-outline" ></ion-icon>
+                                    </button>
+                                    <p class="mt-2">+10</p>
+                                </div> -->
+                                <a href="{{res.resource_link}}" target="_blank" class="text-decoration-none" style="color: #000;">
+                                    <div class="card-content ">
+                                        <h5 class="card-title" style="width: 95%;">{{res.resource_name}} <span><ion-icon name="open-outline"></ion-icon></span></h5>
+                                        <p class="card-text" style="width: 95%;">{{res.resource_info}}  </p>
+                                    </div>
+                                </a>
+                                <div class="r-section mr-4 d-flex flex-column justify-content-start align-items-center " style="width: 40px;    ">
+                                    <form action="{% url 'resource_like' res.id %}" method = "POST">
+                                    {% csrf_token %}
+                                        
+                                        <button type="submit" value = {{res.id}} name = "like" style="background-color: transparent; all:  unset; cursor: pointer;">
+                                            {% if  request.user not in res.liked.all  %}
+                                            <ion-icon name="thumbs-up-outline"></ion-icon>
+                                            {% else %}
+                                            <ion-icon name="thumbs-up"></ion-icon>
+                                            {% endif %}
+                                        </button>
+                                        
+                                    </form>
+                                    <p class="mt-2">{{res.numbmer_of_likes}}</p>
+                                </div>
+                                
+                            </div>
+                            <div class="card-footer">
+                                <span class="badge bg-info text-dark">
+                                    Last Updated: {{res.updated_on | date}}
+                                </span>
+                                {% if res.is_paid %}
+                                <span class="badge bg-warning text-dark">Paid</span>
+                                {% else %}
+                                <span class="badge bg-info text-dark"> Free</span>
+                                {% endif %}
+                                
+                                
+                                <span class="badge bg-info text-dark">{{res.numbmer_of_likes}} Recommendations</span>
+
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!--Card End-->
+                    </article>
+                    
+                </div>
+                <!-- Side widgets-->
+                <div class="col-lg-4 sidebar">
+                    <!-- Search widget-->
+                    <!-- <div class="card mb-4">
+                        <div class="card-header">Search</div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- Categories widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Order by</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Choose</option>
+                                    <option value="1">Latest</option>
+                                    <option value="2">Most Recommended</option>
+                                    <option value="3">Oldest</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Side widget-->
+                    <!-- <div class="card mb-4">
+                        <div class="card-header">Side Widget</div>
+                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}
+

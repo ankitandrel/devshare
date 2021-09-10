@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+        <article class="card-body">
+          <header class="mb-4"><h4 class="card-title">Submit Resource</h4></header>
+          <form method = "POST" action = "{% url 'submit_resource' %}">
+          {% csrf_token %}
+                  <div class="form-row">
+                      <div class="col form-group mt-2">
+                          <label>Name of the resource</label>
+                            <input type="text" class="form-control" name = "resource_name">
+                      </div> <!-- form-group end.// -->
+                      <div class="col form-group mt-2">
+                          <label>What category would you like to put it in?</label>
+                            <input type="text" data-role="tagsinput" class="form-control" name = "resource_category">
+                      </div> <!-- form-group end.// -->
+                  </div> <!-- form-row end.// -->
+                  <div class="form-group mt-2">
+                    <label>Link of the resource.</label>
+                    <input type="url" class="form-control" name = "resource_link">
+                </div>
+                  <div class="form-group mt-2">
+                      <label>Tell us few words about the resource.</label>
+                      <textarea class="form-control"  rows="3" name = "resource_info"></textarea>
+                  </div> <!-- form-group end.// -->
+                 
+                  
+                  <div class="d-grid gap-2 mt-3 ">
+                    <button class="primary-btn text-center" type="submit">Submit</button>
+                    
+                  </div> <!-- form-group// -->      
+                      
+              </form>
+          </article><!-- card-body.// -->
+    </div>
+{% endblock content %}

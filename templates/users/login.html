@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="login" class="card mx-auto" style="max-width:520px; margin-top:40px;">
+        <article class="card-body">
+          <header class="mb-4"><h4 class="card-title">Sign in</h4></header>
+          <form method = "POST" action = "{% url 'login' %}">
+                 {% csrf_token %}
+                  <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name= "username" class="form-control" placeholder="">
+                </div>
+                  
+                 
+                  <div class="form-row">
+                      <div class="form-group col">
+                          <label>Password</label>
+                          <input class="form-control" name = "password" type="password">
+                      </div> <!-- form-group end.// --> 
+                  </div>
+                  <p class="text-center mt-4">Forgot Password ? <a href="{% url 'forgot_password' %}">Reset</a></p>
+                  <div class="d-grid gap-2 mt-4">
+                    <button class="primary-btn text-center" type="submit">Sign In</button>
+                    
+                  </div> <!-- form-group// -->      
+                      
+              </form>
+          </article><!-- card-body.// -->
+      </div> <!-- card .// -->
+      <p class="text-center mt-4">Don't Have Account? <a href="{% url 'register' %}">Create One</a></p>
+      <br><br>
+{% endblock content %}

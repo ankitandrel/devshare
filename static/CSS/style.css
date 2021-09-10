@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&family=Roboto:wght@300;400&display=swap");
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.hero-section {
+  background-color: #242b2e;
+  color: #fff;
+}
+nav {
+  background-color: #242b2e;
+}
+
+.primary-btn {
+  all: unset;
+  background-color: #50546f;
+  padding: 5px 30px;
+  font-size: 18px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+ion-icon {
+  font-size: 24px;
+  pointer-events: none;
+}
+
+footer {
+  margin-top: 100px;
+  background-color: #242b2e;
+  padding: 50px 0px;
+}
+.primary-btn:hover {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.footer-link a {
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+.footer-link a:hover {
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .log_in_out {
+    width: 50%;
+    margin-top: 5px;
+  }
+  .hide-on-mobile {
+    display: none;
+  }
+  .resources-container {
+    width: 100%;
+  }
+}

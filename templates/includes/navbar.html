@@ -1,0 +1,105 @@
+ <header>
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'home' %}">devshare</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'article' %}">Articles</a>
+              </li>
+               <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle active"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Resources
+                </a>
+                <ul
+                  class="dropdown-menu"
+                  aria-labelledby="navbarDropdown"
+                  {% for category in category_links %}  
+                  <li>
+                    <a class="dropdown-item " href="{{ category.get_url }}">{{category.category_name}}</a>
+                  </li>
+                  {% endfor %} 
+                </ul>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'about' %}"
+                  >About</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'contact_form' %}">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'submit_resource' %}">Submit Resource</a>
+              </li>
+              {% if request.user.is_authenticated %}
+              <a
+                class="nav-item active primary-btn log-in-out log_in_out"
+                href="{% url 'profile' %}"
+                style="margin-right: 5px"
+              >
+                Profile
+              </a>
+              {% else %}
+                 <a
+                class="nav-item active primary-btn log-in-out log_in_out"
+                href="{% url 'login' %}"
+                style="margin-right: 5px"
+              >
+                Sign In
+              </a>
+              {% endif %}
+             
+              {% if request.user.is_authenticated %}
+              <a class="log_in_out primary-btn nav-item log-in-out text-decoration-none text-white" href="{% url 'logout_user' %}">Sign out</a>
+              
+              {% else %}
+              <a id="#signup" class=" log_in_out primary-btn nav-item  log-in-out  text-decoration-none" href="{% url 'register' %}">Sign Up</a>
+              {% endif %}
+              
+            </ul>
+          </div>
+        </div>  
+      </nav>
+      <!-- Hero Section -->
+      <div class="p-5 mb-4 hero-section">
+        <div class="py-5">
+          <h1 class="col-md-5 display-5 fs-3  mx-auto text-center">
+            Find Best Development Resources
+            {% comment %} <span class="d-block">By Developers Community</span> {% endcomment %}
+          </h1>
+
+          <div class="col-md-5 mx-auto" style="margin-top: 30px">
+            <form class="d-flex" method="GET" action="{% url 'search' %}">
+              <input
+                class="form-control me-2"
+                type="search"
+                name="keyword"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="primary-btn text-white" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
