@@ -169,7 +169,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_BACKEND = 'sgbackend.SendGridBackend'
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 
 # Twilio SendGrid
 EMAIL_HOST = 'smtp.sendgrid.net'
