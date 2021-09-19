@@ -172,13 +172,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 
 # Twilio SendGrid
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
+EMAIL_HOST = env('MAILGUN_SMTP_SERVER')
+EMAIL_PORT = env('MAILGUN_SMTP_PORT')
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = env('SENDGRID_PASSWORD')
-SENDGRID_API_KEY = env('SENDGRID_API_KEY')
-ENDGRID_SANDBOX_MODE_IN_DEBUG = True
+EMAIL_HOST_USER = env('MAILGUN_SMTP_LOGIN')
+EMAIL_HOST_PASSWORD = env('MAILGUN_SMTP_PASSWORD')
+
+
 
 
 
