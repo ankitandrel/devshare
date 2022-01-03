@@ -46,26 +46,26 @@ def register(request):
                         password = password,
                     )
                     
-                    user.is_active = False
+#                     user.is_active = False
                     user.save()
 
                     # Email Verification
 
-                    current_site = get_current_site(request)
-                    mail_subject = "Please Activate Your Account"
-                    context = {
-                        'user': user,
-                        'domain': current_site,
-                        'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                        'token':default_token_generator.make_token(user),
-                    }
-                    message = render_to_string('users/account_verification_email.html', context)
+#                     current_site = get_current_site(request)
+#                     mail_subject = "Please Activate Your Account"
+#                     context = {
+#                         'user': user,
+#                         'domain': current_site,
+#                         'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+#                         'token':default_token_generator.make_token(user),
+#                     }
+#                     message = render_to_string('users/account_verification_email.html', context)
 
-                    to_email = email
-                    send_email = EmailMessage(mail_subject, message, to = [to_email])
-                    send_email.send()
+#                     to_email = email
+#                     send_email = EmailMessage(mail_subject, message, to = [to_email])
+#                     send_email.send()
 
-                    messages.success(request,'Email verification link sent')
+#                     messages.success(request,'Email verification link sent')
                     return redirect('home')
         else:   
             messages.warning(request,"Password don't Match")
